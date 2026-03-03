@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chúc Mừng Ngày 8/3 - E-sky</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         body {
@@ -98,19 +98,20 @@
             display: none;
             position: fixed;
             inset: 0;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.85);
             z-index: 200;
             align-items: center;
             justify-content: center;
+            padding: 10px;
         }
 
         .modal-content {
             background: white;
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 30px;
             text-align: center;
-            max-width: 500px;
-            width: 90%;
+            max-width: 550px;
+            width: 100%;
             position: relative;
             animation: popUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -122,13 +123,29 @@
 
         #camera-preview {
             width: 100%;
-            border-radius: 20px;
+            border-radius: 15px;
             background: #000;
-            transform: scaleX(-1); /* Mirror effect */
+            transform: scaleX(-1);
+            transition: filter 0.3s ease;
         }
 
         #photo-canvas {
             display: none;
+        }
+
+        .filter-btn {
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            background: #f0f0f0;
+            transition: all 0.2s;
+            border: 1px solid #ddd;
+        }
+
+        .filter-btn.active {
+            background: #ff4d6d;
+            color: white;
+            border-color: #ff4d6d;
         }
 
         #music-toggle {
@@ -169,7 +186,6 @@
         <p class="text-pink-100 text-sm mt-2 opacity-80">Chạm để mở hành trình hạnh phúc</p>
     </div>
 
-    <!-- Nhạc nền -->
     <audio id="bgMusic" loop preload="auto">
         <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg">
     </audio>
@@ -223,41 +239,53 @@
                 </div>
 
                 <div class="flex flex-col gap-2 mt-6">
-                    <button class="bg-pink-500 text-white px-6 py-3 rounded-full font-bold" onclick="openCamera()">Chụp Selfie cùng khung E-sky 📸</button>
-                    <button class="text-gray-400 text-sm" onclick="closeModal()">Bỏ qua</button>
+                    <button class="bg-pink-500 text-white px-6 py-3 rounded-full font-bold shadow-lg" onclick="openCamera()">Selfie Rạng Rỡ 📸</button>
+                    <button class="text-gray-400 text-sm mt-2" onclick="closeModal()">Bỏ qua</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal Camera Selfie -->
+    <!-- Modal Camera Selfie Nâng Cấp -->
     <div id="camera-modal">
-        <div class="modal-content bg-pink-50">
-            <h2 class="text-xl font-bold text-pink-600 mb-4">Selfie kỷ niệm 8/3 cùng E-sky</h2>
+        <div class="modal-content border-4 border-pink-100">
+            <h2 class="text-xl font-bold text-pink-600 mb-4">Khoảnh khắc 8/3 cùng E-sky</h2>
             
-            <div class="relative overflow-hidden rounded-2xl border-4 border-white shadow-lg">
+            <div class="relative overflow-hidden rounded-xl bg-black aspect-[4/3] shadow-inner">
                 <video id="camera-preview" autoplay playsinline></video>
-                <!-- Khung hình overlay giả định -->
-                <div id="frame-overlay" class="absolute inset-0 pointer-events-none flex flex-col justify-between p-4 border-[12px] border-pink-200/30">
-                   <div class="flex justify-between items-start">
-                       <span class="bg-white/80 px-2 py-1 rounded text-[10px] font-bold text-pink-600">E-SKY 8/3</span>
-                       <span class="text-2xl">🌸</span>
-                   </div>
-                   <div class="text-center">
-                       <p class="text-white drop-shadow-lg font-bold text-sm" style="font-family: 'Dancing Script';">Rạng rỡ mỗi ngày</p>
-                   </div>
+                <div id="frame-overlay" class="absolute inset-0 pointer-events-none flex flex-col justify-between p-4 border-[15px] border-pink-300/20">
+                    <div class="flex justify-between items-start">
+                        <div class="bg-white/90 px-3 py-1 rounded-full shadow-sm">
+                            <span class="text-[10px] font-black text-pink-600 tracking-tighter">E-SKY ✨ 8.3</span>
+                        </div>
+                        <span class="text-3xl drop-shadow-md">🌸</span>
+                    </div>
+                    <div class="text-center pb-2">
+                        <p class="text-white drop-shadow-[0_2px_2px_rgba(0,0,0,0.8)] font-bold text-lg italic" style="font-family: 'Dancing Script';">Beautiful Women's Day</p>
+                    </div>
                 </div>
             </div>
 
-            <div id="result-container" class="hidden mt-4">
-                <img id="selfie-result" class="rounded-xl shadow-md w-full" />
-                <p class="text-xs text-pink-400 mt-2">Nhấn giữ ảnh hoặc bấm nút dưới để lưu!</p>
+            <!-- Bộ lọc hình ảnh -->
+            <div id="filter-controls" class="flex justify-center gap-2 mt-4 overflow-x-auto pb-2">
+                <button class="filter-btn active" onclick="setFilter('none', this)">Gốc</button>
+                <button class="filter-btn" onclick="setFilter('brightness(1.1) contrast(1.1) saturate(1.2)', this)">Rạng rỡ</button>
+                <button class="filter-btn" onclick="setFilter('sepia(0.3) contrast(1.1) brightness(1.05)', this)">Vintage</button>
+                <button class="filter-btn" onclick="setFilter('grayscale(1) contrast(1.2)', this)">B&W</button>
+                <button class="filter-btn" onclick="setFilter('blur(0.5px) brightness(1.1)', this)">Mịn màng</button>
             </div>
 
-            <div class="flex justify-center gap-4 mt-6">
-                <button id="capture-btn" class="bg-pink-500 text-white p-4 rounded-full shadow-lg" onclick="takePhoto()">📸 Chụp ảnh</button>
-                <button id="download-btn" class="hidden bg-green-500 text-white px-6 py-2 rounded-full font-bold" onclick="downloadPhoto()">💾 Tải ảnh</button>
-                <button class="bg-gray-200 text-gray-700 px-6 py-2 rounded-full font-bold" onclick="closeCamera()">Đóng</button>
+            <div id="result-container" class="hidden mt-4">
+                <img id="selfie-result" class="rounded-xl shadow-2xl w-full" />
+                <p class="text-xs text-pink-500 mt-2 font-bold animate-pulse">✨ Ảnh đã được gắn khung xinh đẹp! ✨</p>
+            </div>
+
+            <div class="flex justify-center items-center gap-4 mt-6">
+                <button id="capture-btn" class="bg-gradient-to-r from-pink-500 to-rose-500 text-white w-16 h-16 rounded-full shadow-xl flex items-center justify-center border-4 border-white" onclick="takePhoto()">
+                    <span class="text-2xl">📸</span>
+                </button>
+                <button id="download-btn" class="hidden bg-green-500 text-white px-6 py-3 rounded-full font-bold shadow-lg" onclick="downloadPhoto()">💾 Lưu Ảnh Kỷ Niệm</button>
+                <button class="bg-gray-100 text-gray-600 px-6 py-3 rounded-full font-bold" onclick="closeCamera()">Đóng</button>
             </div>
         </div>
     </div>
@@ -273,10 +301,10 @@
             { icon: '🌟', text: 'Luôn tỏa sáng rực rỡ nhé!' }
         ];
         const messages = [
-            "Bạn là điều tuyệt vời nhất ngày hôm nay!",
-            "Hãy luôn mỉm cười, vì nụ cười bạn rất đẹp.",
-            "Tự tin là trang sức quý giá nhất của phụ nữ.",
-            "E-sky chúc bạn một ngày 8/3 ngập tràn tình yêu."
+            "Bạn là đóa hoa rạng rỡ nhất ngày hôm nay!",
+            "Cả thế giới trở nên đẹp hơn nhờ nụ cười của bạn.",
+            "Tự tin và kiêu hãnh - Đó là vẻ đẹp của phụ nữ E-sky.",
+            "Chúc bạn một ngày 8/3 ngập tràn sự yêu chiều."
         ];
 
         function openGiftScene() {
@@ -322,18 +350,28 @@
 
         function closeModal() { document.getElementById('gift-modal').style.display = 'none'; }
 
-        // Camera Logic
+        // Camera & Filter Logic
         let stream;
+        let currentFilter = 'none';
+
+        function setFilter(filter, btn) {
+            currentFilter = filter;
+            document.getElementById('camera-preview').style.filter = filter;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
         async function openCamera() {
             closeModal();
             document.getElementById('camera-modal').style.display = 'flex';
             document.getElementById('camera-preview').classList.remove('hidden');
+            document.getElementById('filter-controls').classList.remove('hidden');
             document.getElementById('result-container').classList.add('hidden');
             document.getElementById('capture-btn').classList.remove('hidden');
             document.getElementById('download-btn').classList.add('hidden');
             
             try {
-                stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: false });
+                stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user', width: 1280, height: 720 }, audio: false });
                 document.getElementById('camera-preview').srcObject = stream;
             } catch (err) {
                 alert("Không thể truy cập camera. Vui lòng cấp quyền!");
@@ -346,45 +384,84 @@
             const canvas = document.getElementById('photo-canvas');
             const ctx = canvas.getContext('2d');
 
-            canvas.width = 640;
-            canvas.height = 480;
+            // Thiết kế canvas chất lượng cao
+            canvas.width = 1080;
+            canvas.height = 1080; 
 
-            // Chụp ảnh từ video (lật gương)
+            // Vẽ nền đen trước
+            ctx.fillStyle = "#000";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Chụp ảnh từ video (lật gương & áp dụng filter)
             ctx.save();
+            if (currentFilter !== 'none') ctx.filter = currentFilter;
             ctx.translate(canvas.width, 0);
             ctx.scale(-1, 1);
-            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            // Cắt video vào khung vuông trung tâm
+            const size = Math.min(video.videoWidth, video.videoHeight);
+            const sx = (video.videoWidth - size) / 2;
+            const sy = (video.videoHeight - size) / 2;
+            ctx.drawImage(video, sx, sy, size, size, 0, 0, canvas.width, canvas.height);
             ctx.restore();
 
-            // Vẽ khung hình (Frame)
-            ctx.strokeStyle = "rgba(255, 182, 193, 0.5)";
-            ctx.lineWidth = 30;
-            ctx.strokeRect(15, 15, canvas.width - 30, canvas.height - 30);
+            // VẼ KHUNG HÌNH NGHỆ THUẬT
+            // 1. Viền trang trí ngoài
+            ctx.strokeStyle = "rgba(255, 182, 193, 0.8)";
+            ctx.lineWidth = 40;
+            ctx.strokeRect(20, 20, canvas.width - 40, canvas.height - 40);
 
-            // Vẽ Logo E-sky & Text
+            // 2. Góc trang trí (Hoa giả định bằng vẽ)
+            ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+            ctx.beginPath();
+            ctx.arc(60, 60, 30, 0, Math.PI * 2);
+            ctx.arc(canvas.width - 60, 60, 30, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 3. Logo & Text E-sky
             ctx.fillStyle = "#ff4d6d";
-            ctx.font = "bold 24px Arial";
-            ctx.fillText("E-SKY CELEBRATION", 40, 60);
+            ctx.font = "bold 45px Arial";
+            ctx.textAlign = "left";
+            ctx.fillText("E-SKY", 80, 100);
             
-            ctx.font = "italic 40px 'Dancing Script', cursive";
+            ctx.fillStyle = "rgba(255,255,255,0.9)";
+            ctx.font = "bold 30px Arial";
+            ctx.fillText("CELEBRATION 8.3", 80, 140);
+
+            // 4. Lời chúc phía dưới
             ctx.textAlign = "center";
-            ctx.fillText("Chúc mừng 8/3 rạng rỡ", canvas.width / 2, canvas.height - 60);
+            ctx.fillStyle = "white";
+            ctx.font = "italic 70px 'Dancing Script', cursive";
+            ctx.shadowColor = "rgba(0,0,0,0.5)";
+            ctx.shadowBlur = 10;
+            ctx.fillText("Rạng rỡ như đóa hoa xuân", canvas.width / 2, canvas.height - 100);
+            
+            ctx.shadowBlur = 0;
+            ctx.font = "bold 30px Arial";
+            ctx.fillText("HAPPY WOMEN'S DAY", canvas.width / 2, canvas.height - 50);
+
+            // 5. Thêm các cánh hoa nhỏ ngẫu nhiên
+            for(let i=0; i<10; i++) {
+                ctx.font = "30px Arial";
+                ctx.fillText("🌸", Math.random()*canvas.width, Math.random()*canvas.height);
+            }
 
             // Hiển thị kết quả
             const dataUrl = canvas.toDataURL('image/png');
             document.getElementById('selfie-result').src = dataUrl;
             document.getElementById('camera-preview').classList.add('hidden');
+            document.getElementById('filter-controls').classList.add('hidden');
             document.getElementById('result-container').classList.remove('hidden');
             document.getElementById('capture-btn').classList.add('hidden');
             document.getElementById('download-btn').classList.remove('hidden');
             
             if (stream) stream.getTracks().forEach(track => track.stop());
-            confetti({ particleCount: 50, spread: 50 });
+            confetti({ particleCount: 100, spread: 80, origin: { y: 0.8 } });
         }
 
         function downloadPhoto() {
             const link = document.createElement('a');
-            link.download = 'Esky-8-3-Selfie.png';
+            link.download = 'Esky-8-3-KhoanhKhacDep.png';
             link.href = document.getElementById('selfie-result').src;
             link.click();
         }
@@ -395,20 +472,20 @@
         }
 
         function createFallingItem() {
-            const items = ['🌸', '💖', '✨'];
+            const items = ['🌸', '💖', '✨', '🌹'];
             const item = document.createElement('div');
             item.className = 'absolute pointer-events-none text-xl';
             item.innerText = items[Math.floor(Math.random() * items.length)];
             item.style.left = Math.random() * 100 + 'vw';
             item.style.top = '-20px';
             item.animate([
-                { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
+                { transform: 'translateY(0) rotate(0deg)', opacity: 0.8 },
                 { transform: `translateY(110vh) rotate(360deg)`, opacity: 0 }
-            ], { duration: 5000, easing: 'linear' });
+            ], { duration: 6000, easing: 'linear' });
             document.getElementById('effect-container').appendChild(item);
-            setTimeout(() => item.remove(), 5000);
+            setTimeout(() => item.remove(), 6000);
         }
-        setInterval(createFallingItem, 600);
+        setInterval(createFallingItem, 500);
     </script>
 </body>
 </html>
