@@ -93,7 +93,7 @@
             z-index: 10;
             border: none;
             width: 100%;
-            max-width: 320px;
+            max-width: 420px;
         }
 
         .btn-luxury:active {
@@ -145,19 +145,7 @@
             margin: 0 auto;
             border: 5px solid white;
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            touch-action: none; /* Quan trọng để kéo trên đt */
-        }
-
-        .heart-icon {
-            display: inline-block;
-            animation: pulse 0.8s infinite;
-            margin-left: 5px;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-            100% { transform: scale(1); }
+            touch-action: none;
         }
 
         .page-footer {
@@ -172,7 +160,14 @@
             pointer-events: none;
         }
 
-        /* Mobile specific controls */
+        #resultImage {
+            max-width: 100%;
+            border-radius: 10px;
+            display: none;
+            margin: 10px auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
         input[type=range] {
             height: 38px;
             -webkit-appearance: none;
@@ -196,14 +191,6 @@
             -webkit-appearance: none;
             margin-top: -8px;
         }
-
-        #resultImage {
-            max-width: 100%;
-            border-radius: 10px;
-            display: none;
-            margin: 10px auto;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
     </style>
 </head>
 <body>
@@ -214,20 +201,20 @@
     <div id="gift-scene">
         <div class="gift-box animate__animated animate__tada animate__infinite" onclick="openInitialGift()">🎁</div>
         <div class="text-white mt-8 text-center animate__animated animate__fadeIn px-6">
-            <h2 class="text-2xl font-bold mb-2">MỪNG NGÀY 8/3</h2>
-            <p class="text-sm opacity-90">Chạm vào hộp quà để bắt đầu</p>
+            <h2 class="text-2xl font-bold mb-2">CHÀO MỪNG NGÀY QUỐC TẾ PHỤ NỮ 8/3</h2>
+            <p class="text-sm opacity-90">Nhấn vào hộp quà và khám phá món quà bí mật từ E-sky nhé!</p>
         </div>
     </div>
 
     <!-- TRANG CHỦ -->
     <div id="welcome-content" class="hidden w-full flex justify-center items-center min-h-screen p-4">
         <div class="glass-card animate__animated animate__fadeIn text-center">
-            <h3 class="text-pink-500 font-bold text-xs mb-2 uppercase tracking-widest">E-sky Center</h3>
+            <h3 class="text-pink-500 font-bold text-xs mb-2 uppercase tracking-widest">Trung tâm Ngoại ngữ và Tin học E-sky</h3>
             <h1 class="text-3xl font-bold text-gray-800 mb-4">TÔN VINH PHÁI ĐẸP</h1>
             <p class="text-gray-600 text-base mb-8 italic leading-relaxed">
-                "Phụ nữ là kiệt tác của vũ trụ. <br> Chúc bạn một ngày 8/3 rạng rỡ!"
+                Phụ nữ là kiệt tác của vũ trụ. <br> Chúc một nửa thế giới luôn xinh đẹp, tự tin và tỏa sáng mỗi ngày.
             </p>
-            <button class="btn-luxury" onclick="showWishModal()">NHẬN LỜI CHÚC ❤️</button>
+            <button class="btn-luxury" onclick="showWishModal()">NHẬN LỜI CHÚC TỪ TRÁI TIM ❤️</button>
         </div>
     </div>
 
@@ -238,17 +225,16 @@
             <div class="wish-container">
                 <p id="random-wish" class="text-gray-800 text-lg italic"></p>
             </div>
-            <button class="btn-luxury" style="animation: none;" onclick="goToPhotoStep()">TIẾP TỤC ❤️</button>
+            <button class="btn-luxury" style="animation: none;" onclick="goToPhotoStep()">XÁC NHẬN NHẬN QUÀ ❤️</button>
         </div>
     </div>
 
     <!-- TẠO ẢNH -->
     <div id="photo-modal" class="overlay-modal">
         <div class="bg-white p-5 rounded-[2rem] max-w-lg w-full text-center overflow-y-auto max-h-[90vh]">
-            
             <div id="photo-editor">
-                <h2 class="text-xl font-bold text-gray-800 mb-2">Tạo Ảnh Kỷ Niệm</h2>
-                <p class="text-xs text-gray-400 mb-4">Dùng 1 ngón tay để di chuyển, kéo thanh trượt để phóng to</p>
+                <h2 class="text-xl font-bold text-gray-800 mb-2">Lưu Giữ Khoảnh Khắc</h2>
+                <p class="text-xs text-gray-400 mb-4">Bạn hãy tải lên một tấm ảnh thật đẹp vào đây nhé!</p>
                 
                 <input type="file" id="fileInput" accept="image/*" class="hidden" onchange="handleFileUpload(event)">
                 
@@ -283,8 +269,8 @@
 
             <div id="final-thankyou" class="hidden py-4">
                 <div class="text-5xl mb-4">🌸</div>
-                <h2 class="text-2xl font-bold text-pink-600">Chúc mừng 8/3!</h2>
-                <p class="text-gray-500 text-sm mb-6 px-4">E-sky hy vọng bạn đã có một trải nghiệm thú vị.</p>
+                <h2 class="text-2xl font-bold text-pink-600">Chúc bạn một ngày 8/3 thật xinh đẹp và hạnh phúc.</h2>
+                <p class="text-gray-500 text-sm mb-6 px-4">Hãy ghi lại nụ cười của bạn và đăng lên mạng xã hội để lưu giữ khoảnh khắc đáng nhớ hôm nay!</p>
                 <button class="text-pink-400 underline text-sm" onclick="location.reload()">Làm lại ảnh mới</button>
             </div>
         </div>
@@ -297,11 +283,21 @@
     <script>
         const wishes = [
             "Chúc bạn luôn xinh đẹp, rạng rỡ và là đóa hoa thơm ngát nhất!",
-            "Chúc bạn luôn tự tin, bản lĩnh và thành công rực rỡ.",
-            "Mong bạn luôn hạnh phúc, tràn đầy năng lượng mỗi ngày.",
-            "Chúc bạn nhận được thật nhiều quà và những lời chúc ngọt ngào.",
-            "Yêu thương bản thân nhiều hơn, vì bạn xứng đáng nhất.",
-            "Chúc bạn rạng rỡ như ánh bình minh và ngọt ngào như thơ."
+            "Chúc bạn không chỉ có hoa hôm nay, mà có cả người tặng hoa tử tế suốt 365 ngày còn lại.",
+            "8/3 chúc bạn đẹp từ trong mindset đẹp ra ngoài visual – vì khí chất mới là thứ giữ người ta ở lại.",
+            "Hôm nay là ngày của bạn, nhưng thật ra ngày nào bạn cũng xứng đáng được trân trọng – nhớ đừng quên điều đó nhé.",
+            "Chúc bạn luôn là người phụ nữ vừa độc lập tài chính, vừa độc quyền hạnh phúc.",
+            "8/3 mong bạn cười nhiều hơn suy nghĩ, ngủ ngon hơn lo lắng và yêu bản thân nhiều hơn những gì người khác kỳ vọng.",
+            "Chúc bạn 8/3 không chỉ có hoa mà còn có cả… bill được thanh toán sẵn.",
+            "Chúc bạn luôn xinh đẹp theo cách của mình – còn ai không thấy xinh thì chắc do họ chưa update mắt.",
+            "8/3 mong bạn tiền vào như nước, drama ra như khói.",
+            "Chúc bạn yêu ai cũng được cưng như công chúa, nhưng lỡ có buồn thì vẫn tự mua được vương miện cho mình.",
+            "Mong bạn luôn “chill” trước deadline, “cool” trước lời thiên hạ và “full pin” trước mọi thử thách.",
+            "Chúc bạn đẹp bất chấp camera thường và giàu bất chấp tình hình kinh tế.",
+            "8/3 chúc bạn nói ít hiểu nhiều, ăn ít mà không tăng ký (ước mơ chung của hội chị em 😆).",
+            "Mong bạn luôn tỉnh táo khi yêu và… giả vờ ngốc khi cần thiết.",
+            "Chúc bạn luôn được yêu thương đúng người – còn sai người thì coi như trải nghiệm để viết status hay hơn.",
+            "8/3 chúc bạn sống như nữ chính: có thần thái, có khí chất, và có cả plot twist nhưng vẫn happy ending."
         ];
 
         let selectedWish = "";
@@ -312,7 +308,6 @@
         const ctx = canvas.getContext('2d');
         const resultImg = document.getElementById('resultImage');
 
-        // Kích thước chuẩn HD (tỉ lệ 3:4 cho Facebook/Instagram)
         const C_WIDTH = 1200;
         const C_HEIGHT = 1600;
         const MARGIN = 80;
@@ -330,7 +325,7 @@
 
         function showWishModal() {
             selectedWish = wishes[Math.floor(Math.random() * wishes.length)];
-            document.getElementById('random-wish').innerText = `"${selectedWish}"`;
+            document.getElementById('random-wish').innerText = selectedWish;
             document.getElementById('wish-modal').style.display = 'flex';
         }
 
@@ -348,16 +343,13 @@
                 userImg.onload = () => {
                     document.getElementById('upload-zone').style.display = 'none';
                     canvas.style.display = 'block';
-                    
                     const baseScale = Math.max(P_WIDTH / userImg.width, P_HEIGHT / userImg.height);
                     imgState.scale = baseScale;
                     imgState.x = (C_WIDTH / 2) - (userImg.width * baseScale) / 2;
                     imgState.y = MARGIN + (P_HEIGHT / 2) - (userImg.height * baseScale) / 2;
-                    
                     document.getElementById('zoomRange').value = baseScale;
                     document.getElementById('zoomRange').min = baseScale * 0.3;
                     document.getElementById('zoomRange').max = baseScale * 4;
-                    
                     document.getElementById('photo-actions').classList.remove('hidden');
                     render();
                 };
@@ -366,7 +358,6 @@
             reader.readAsDataURL(file);
         }
 
-        // Touch & Mouse Events
         function getPos(e) {
             const rect = canvas.getBoundingClientRect();
             const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -377,15 +368,15 @@
             };
         }
 
-        const startMove = (e) => {
+        canvas.addEventListener('mousedown', (e) => {
             if (!userImg) return;
             imgState.isDragging = true;
             const pos = getPos(e);
             imgState.lastX = pos.x;
             imgState.lastY = pos.y;
-        };
+        });
 
-        const move = (e) => {
+        canvas.addEventListener('mousemove', (e) => {
             if (!imgState.isDragging) return;
             e.preventDefault();
             const pos = getPos(e);
@@ -394,20 +385,48 @@
             imgState.lastX = pos.x;
             imgState.lastY = pos.y;
             render();
-        };
+        });
 
-        const endMove = () => imgState.isDragging = false;
+        window.addEventListener('mouseup', () => imgState.isDragging = false);
 
-        canvas.addEventListener('mousedown', startMove);
-        canvas.addEventListener('mousemove', move);
-        window.addEventListener('mouseup', endMove);
-        canvas.addEventListener('touchstart', startMove, {passive: false});
-        canvas.addEventListener('touchmove', move, {passive: false});
-        canvas.addEventListener('touchend', endMove);
+        canvas.addEventListener('touchstart', (e) => {
+            if (!userImg) return;
+            imgState.isDragging = true;
+            const pos = getPos(e);
+            imgState.lastX = pos.x;
+            imgState.lastY = pos.y;
+        }, {passive: false});
+
+        canvas.addEventListener('touchmove', (e) => {
+            if (!imgState.isDragging) return;
+            e.preventDefault();
+            const pos = getPos(e);
+            imgState.x += (pos.x - imgState.lastX);
+            imgState.y += (pos.y - imgState.lastY);
+            imgState.lastX = pos.x;
+            imgState.lastY = pos.y;
+            render();
+        }, {passive: false});
+
+        canvas.addEventListener('touchend', () => imgState.isDragging = false);
 
         function updateZoomFromRange(val) {
             imgState.scale = parseFloat(val);
             render();
+        }
+
+        function drawLeaf(context, x, y, angle) {
+            const leafSize = 18;
+            context.save();
+            context.translate(x, y);
+            context.rotate(angle);
+            context.beginPath();
+            context.moveTo(0, 0);
+            context.bezierCurveTo(leafSize / 2, leafSize / 2, leafSize, 0, leafSize / 2, -leafSize / 2);
+            context.closePath();
+            context.fillStyle = "#99cc33";
+            context.fill();
+            context.restore();
         }
 
         function render() {
@@ -424,24 +443,39 @@
                 ctx.restore();
             }
 
+            // Vẽ họa tiết lá vòng quanh viền
+            const leafGap = 40;
+            for (let x = MARGIN; x <= MARGIN + P_WIDTH; x += leafGap) {
+                drawLeaf(ctx, x, MARGIN - 12, -Math.PI/4);
+                drawLeaf(ctx, x, MARGIN + P_HEIGHT + 12, Math.PI - Math.PI/4);
+            }
+            for (let y = MARGIN; y <= MARGIN + P_HEIGHT; y += leafGap) {
+                drawLeaf(ctx, MARGIN - 12, y, -Math.PI/2 - Math.PI/4);
+                drawLeaf(ctx, MARGIN + P_WIDTH + 12, y, Math.PI/2 - Math.PI/4);
+            }
+
             // Frame decorations
             ctx.strokeStyle = "#ffb7c5";
             ctx.lineWidth = 6;
             ctx.strokeRect(MARGIN - 10, MARGIN - 10, P_WIDTH + 20, P_HEIGHT + 20);
 
-            // Text
             ctx.textAlign = "center";
+            
+            // 1. Tên trung tâm (trên cùng của phần chữ)
             ctx.fillStyle = "#888"; 
             ctx.font = "bold 30px 'Times New Roman', serif";
             ctx.fillText("E-SKY CENTER 2026", C_WIDTH / 2, MARGIN + P_HEIGHT + 80);
 
-            ctx.fillStyle = "#333"; 
-            ctx.font = "italic 42px 'Times New Roman', serif";
-            wrapText(ctx, `"${selectedWish}"`, C_WIDTH / 2, MARGIN + P_HEIGHT + 160, P_WIDTH - 100, 60);
-
+            // 2. HAPPY WOMEN'S DAY (Đưa lên trên Lời chúc)
             ctx.fillStyle = "#f72585"; 
             ctx.font = "bold 85px 'Times New Roman', serif";
-            ctx.fillText("HAPPY WOMEN'S DAY", C_WIDTH / 2, C_HEIGHT - 120);
+            ctx.fillText("HAPPY WOMEN'S DAY", C_WIDTH / 2, MARGIN + P_HEIGHT + 200);
+
+            // 3. Lời chúc (Đưa xuống cuối cùng để không bị đè)
+            ctx.fillStyle = "#333"; 
+            ctx.font = "italic 42px 'Times New Roman', serif";
+            // y start từ 280 để cách xa dòng tiêu đề trên
+            wrapText(ctx, selectedWish, C_WIDTH / 2, MARGIN + P_HEIGHT + 310, P_WIDTH - 100, 60);
         }
 
         function wrapText(context, text, x, y, maxWidth, lineHeight) {
@@ -463,16 +497,12 @@
 
         function downloadPhoto() {
             const dataUrl = canvas.toDataURL('image/png', 0.9);
-            
-            // Hiện ảnh thật thay cho canvas để nhấn giữ lưu được trên mobile
             resultImg.src = dataUrl;
             resultImg.style.display = 'block';
             canvas.style.display = 'none';
-            
             document.getElementById('longPressTip').classList.remove('hidden');
             document.getElementById('downloadBtn').innerText = "ĐANG TẢI...";
 
-            // Thử lệnh tải tự động
             const link = document.createElement('a');
             link.download = `Esky_8_3_Memory.png`;
             link.href = dataUrl;
@@ -480,7 +510,6 @@
             link.click();
             document.body.removeChild(link);
 
-            // Chuyển sang màn hình cảm ơn sau 3 giây
             setTimeout(() => {
                 document.getElementById('photo-editor').classList.add('hidden');
                 document.getElementById('final-thankyou').classList.remove('hidden');
@@ -499,7 +528,6 @@
             document.getElementById('downloadBtn').innerText = "TẢI ẢNH NGAY 💾";
         }
 
-        // Hiệu ứng cánh hoa rơi
         function createPetal() {
             const petal = document.createElement('div');
             petal.className = 'petal';
@@ -513,6 +541,10 @@
             setTimeout(() => petal.remove(), 8000);
         }
         setInterval(createPetal, 1000);
+
+        const style = document.createElement('style');
+        style.innerHTML = `@keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }`;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
